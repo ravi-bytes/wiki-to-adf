@@ -1,0 +1,50 @@
+h1. Project Alpha Documentation
+
+This document describes the *Project Alpha* rollout. Please review carefully.
+
+h2. Objectives
+
+# Deliver the **MVP** by Q2
+# Collect feedback from @[jdoe]
+# Prepare launch panel
+
+h2. Links
+
+* [Project Alpha Dashboard|https://jira.example.com/secure/Dashboard.jspa]
+* [Release Notes|https://jira.example.com/secure/ReleaseNote.jspa?projectId=10000]
+
+h2. Details
+
+|| Feature || Status || Owner ||
+| Login API | In Progress | @[asmith] |
+| Payment Gateway | Done | @[jdoe] |
+| Reporting Module | Blocked | @[mnguyen] |
+
+h3. Notes
+
+bq. This module is tightly coupled with the existing billing system. Exercise caution.
+
+h2. Code Snippet
+
+{code:python}
+def calculate_total(items):
+    return sum(item.price for item in items if item.active)
+{code}
+
+h2. Panels
+
+{panel:title=Important Risks|borderStyle=dashed|borderColor=#FF0000|bgColor=#FFF0F0}
+* Third-party dependency upgrades may slip
+* Compliance audit scheduled next month
+{panel}
+
+h2. Checklist
+
+- [x] Architecture review
+- [ ] Security assessment
+- [ ] Final sign-off
+
+h2. Mention and Formatting Test
+
+Please confirm with @[pmiller].  
+Also check with the _Design_ team.
