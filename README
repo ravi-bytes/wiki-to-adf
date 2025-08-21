@@ -1,0 +1,34 @@
+## wiki2adf.py Usage
+
+`wiki2adf.py` converts Jira Wiki markup files to Atlassian Document Format (ADF) JSON files.
+
+### How to Run
+
+Run the script from the command line:
+
+```bash
+python3 wiki2adf.py <input-wiki-file.txt> <output-adf-file.txt>
+```
+
+Example:
+
+```bash
+python3 wiki2adf.py input-1.txt output-1.txt
+```
+
+### Input
+
+- The input file should contain Jira Wiki markup.
+
+### Output
+
+- The output file will contain the ADF JSON representation.
+- An error log file will also be generated, named as `<output-adf-file-errors.log>` (e.g., `output-1-errors.log`).
+
+## Error Logging
+
+- Any formatting or parsing errors encountered during conversion are logged in the error log file.
+- Each error entry includes the line number and a description of the issue.
+- If blocks (like `{code}`, `{panel}`, `{noformat}`) are not properly closed, or if tables/lists are malformed, these will be reported in the log.
+
+Check the error log file for details if the output is incomplete or unexpected.
