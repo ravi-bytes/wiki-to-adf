@@ -66,3 +66,48 @@ python3 wiki2adf.py input-1.txt output-1.txt
 - If blocks (like `{code}`, `{panel}`, `{noformat}`) are not properly closed, or if tables/lists are malformed, these will be reported in the log.
 
 Check the error log file for details if the output is incomplete or unexpected.
+
+
+
+
+## ------------------
+# Jira Wiki Markup to ADF Converter
+
+A comprehensive Python module that converts Jira Wiki Markup to ADF (Atlassian Document Format) with robust error handling and logging.
+
+## Features
+
+### Complete Jira Wiki Markup Support
+- ✅ **Text Formatting**: `*bold*`, `_italic_`, `+underline+`, `-strike-`, `^super^`, `~sub~`, `{{code}}`
+- ✅ **Headings**: `h1.` through `h6.` 
+- ✅ **Lists**: Bullet (`*`) and numbered (`#`) with nesting
+- ✅ **Tables**: Headers (`||header||`) and cells (`|cell|`)
+- ✅ **Links**: `[text|url]` and `[url]` formats
+- ✅ **Images**: `!image.png!` format
+- ✅ **Colors**: `{color:red}text{color}` and hex colors
+- ✅ **Code Blocks**: `{code:language}` and `{noformat}`
+- ✅ **Quotes**: `{quote}` blocks
+- ✅ **Panels**: `{panel:title=X}` blocks
+- ✅ **Line Breaks**: `\\` and horizontal rules `----`
+
+### Robust Error Handling
+- **Graceful Fallbacks**: Malformed elements convert to paragraphs
+- **Error Logging**: Detailed error tracking with line numbers
+- **Continues Parsing**: Never stops on errors, always produces output
+- **Error Summary**: Complete report of all issues encountered
+
+### Professional Structure
+- **Modular Design**: Separate handlers for each element type
+- **Type Safety**: Full type hints and dataclasses
+- **Performance**: Compiled regex patterns for speed
+- **Extensible**: Easy to add new markup types
+
+## Installation
+
+```bash
+# Clone the repository
+git clone <repository-url>
+cd jira-wiki-to-adf-converter
+
+# No external dependencies required - uses only Python standard library
+
