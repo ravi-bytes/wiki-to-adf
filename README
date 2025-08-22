@@ -189,3 +189,54 @@ All errors have been handled gracefully and parsing continued.
   ]
 }
 
+Supported Jira Wiki Markup Elements
+Text Formatting
+wiki*bold text*
+_italic text_
++underlined text+
+-strikethrough text-
+^superscript^
+~subscript~
+{{monospace}}
+??citation??
+{color:red}colored text{color}
+{color:#ff0000}hex colored text{color}
+Structural Elements
+wikih1. Heading 1
+h2. Heading 2
+...
+h6. Heading 6
+
+* Bullet list item
+** Nested bullet item
+# Numbered list item
+## Nested numbered item
+
+||Header 1||Header 2||
+|Cell 1|Cell 2|
+|Cell 3|Cell 4|
+Links and Media
+wiki[Simple Link|https://example.com]
+[https://example.com]
+!image.png!
+Code and Quotes
+wiki{code:java}
+public class Example {
+    // Java code here
+}
+{code}
+
+{noformat}
+Preformatted text
+{noformat}
+
+{quote}
+This is a quote block
+{quote}
+Special Elements
+wiki{panel:title=Important}
+Panel content here
+{panel}
+
+----  // Horizontal rule
+\\    // Line break
