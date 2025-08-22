@@ -111,3 +111,81 @@ cd jira-wiki-to-adf-converter
 
 # No external dependencies required - uses only Python standard library
 
+
+## Usage
+
+### Command Line
+
+```bash
+python jira_wiki_to_adf.py input_file.txt
+# Creates: input_file-adf.txt
+
+## Programmatic Usage
+from jira_wiki_to_adf import JiraWikiToADFConverter
+
+# Convert a file
+converter = JiraWikiToADFConverter()
+output_file = converter.convert_file('input.txt')
+
+# Convert text directly
+adf_content = converter.convert_text(wiki_markup_text)
+
+# Get error summary
+error_summary = converter.get_error_summary()
+print(f"Total errors: {error_summary['total_errors']}")
+
+## Testing
+python jira_wiki_to_adf.py --test
+# Creates and converts a comprehensive test file
+
+
+## Error Handling
+| Error Type | Handling | Example |
+|---|---|---|
+| **Malformed tables** | Converts to paragraphs | `||incomplete table` |
+| **Invalid colors** | Uses plain text | `{color:invalidcolor}text{color}` |
+| **Unclosed formatting** | Treats as literal text | `*unclosed bold` |
+| **Unknown macros** | Preserves as text | `{unknownmacro}content{unknownmacro}` |
+| **Nested formatting conflicts** | Uses outermost formatting | `*bold _italic* text_` |
+
+
+## Error Report Example
+PARSING ERROR SUMMARY
+========================================
+
+malformed_table (2 occurrences):
+  Line 15: Table parsing failed: insufficient cells
+    Original: '||Header|incomplete'
+    Parsed as: 'Converted to paragraph'
+
+invalid_color (1 occurrence):
+  Line 23: Invalid color value: invalidred
+    Original: '{color:invalidred}text{color}'
+    Parsed as: 'Plain text: text'
+========================================
+Total errors: 3
+All errors have been handled gracefully and parsing continued.
+
+## Output Format
+### Generates valid ADF JSON with proper structure:
+{
+  "version": 1,
+  "type": "doc",
+  "content": [
+    {
+      "type": "paragraph",
+      "content": [
+        {
+          "type": "text",
+          "text": "Hello ",
+          "marks": [{"type": "strong"}]
+        },
+        {
+          "type": "text",
+          "text": "World!"
+        }
+      ]
+    }
+  ]
+}
+
