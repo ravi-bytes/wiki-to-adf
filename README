@@ -20,4 +20,138 @@
 >
 > ### Robust Error Handling
 > - **Graceful Fallbacks**: Malformed elements are converted to plain text paragraphs to ensure no content is lost.
-> - **Detailed Logging
+> - **Detailed Logging**: Every error is tracked with its line number and a clear description.
+> - **Continuous Parsing**: The converter never stops on an error, guaranteeing a complete output.
+> - **Error Summary**: Provides a full report of all issues encountered during conversion.
+>
+> ### Professional Structure
+> - **Modular Design**: Each markup element is handled by a dedicated, easy-to-maintain component.
+> - **Type Safety**: Fully typed with Python's type hints and dataclasses for reliability.
+> - **Performance**: Uses compiled regular expressions for fast and efficient parsing.
+> - **Extensible**: The architecture makes it simple to add support for new or custom markup types.
+>
+> ---
+>
+> ## 🚀 Installation
+>
+> The module uses only Python's standard library, so no external dependencies are required.
+>
+> ```bash
+> # Clone the repository
+> git clone <repository-url>
+> cd jira-wiki-to-adf-converter
+> ```
+>
+> ---
+>
+> ## 💻 Usage
+>
+> The converter can be run from the command line or used programmatically within your own Python projects.
+>
+> ### Command Line
+>
+> To convert a file, run the script and provide the input file as an argument.
+>
+> ```bash
+> python3 jira_wiki_to_adf.py <input-wiki-file.txt>
+> ```
+> This command will generate an output file named `<input-wiki-file-adf.json>` containing the ADF content.
+>
+> ### Programmatic Usage
+>
+> You can also import and use the `JiraWikiToADFConverter` class directly in your code.
+>
+> ```python
+> from jira_wiki_to_adf import JiraWikiToADFConverter
+>
+> # Initialize the converter
+> converter = JiraWikiToADFConverter()
+>
+> # Convert a file and get the output path
+> output_file = converter.convert_file('input.txt')
+> print(f"ADF content saved to: {output_file}")
+>
+> # Or convert a string of wiki markup directly
+> wiki_markup_text = "*Hello*, _world_!"
+> adf_content = converter.convert_text(wiki_markup_text)
+> print(adf_content)
+>
+> # You can also retrieve a summary of any errors found
+> error_summary = converter.get_error_summary()
+> if error_summary['total_errors'] > 0:
+>     print(f"Found {error_summary['total_errors']} errors.")
+> ```
+>
+> ### Testing
+>
+> To run a built-in test that demonstrates all supported features, use the `--test` flag. This will generate a comprehensive test file and its ADF conversion.
+>
+> ```bash
+> python3 jira_wiki_to_adf.py --test
+> ```
+>
+> ---
+>
+> ## ⚠️ Error Handling
+>
+> The converter is designed to handle broken or invalid Jira Wiki Markup gracefully. Instead of failing, it logs the error and converts the problematic markup into a readable plain text equivalent.
+>
+> | Error Type | Handling | Example |
+> |---|---|---|
+> | **Malformed tables** | Converts to paragraphs | `||incomplete table` |
+> | **Invalid colors** | Uses plain text | `{color:invalidcolor}text{color}` |
+> | **Unclosed formatting** | Treats as literal text | `*unclosed bold` |
+> | **Unknown macros** | Preserves as text | `{unknownmacro}content{unknownmacro}` |
+> | **Nested formatting conflicts**| Uses outermost formatting | `*bold _italic* text_` |
+>
+> #### Example Error Report
+>
+> After a conversion, you can access a detailed report of all issues that were found and handled.
+>
+> ```
+> PARSING ERROR SUMMARY
+> ========================================
+>
+> malformed_table (2 occurrences):
+>   Line 15: Table parsing failed: insufficient cells
+>     Original: '||Header|incomplete'
+>     Parsed as: 'Converted to paragraph'
+>
+> invalid_color (1 occurrence):
+>   Line 23: Invalid color value: invalidred
+>     Original: '{color:invalidred}text{color}'
+>     Parsed as: 'Plain text: text'
+> ========================================
+> Total errors: 3
+> All errors have been handled gracefully and parsing continued.
+> ```
+>
+> ---
+>
+> ## 📄 Output Format
+>
+> The script generates a valid JSON file in Atlassian Document Format (ADF), which is ready to be used with Jira or other Atlassian products.
+>
+> #### Example ADF JSON Output
+> ```json
+> {
+>   "version": 1,
+>   "type": "doc",
+>   "content": [
+>     {
+>       "type": "paragraph",
+>       "content": [
+>         {
+>           "type": "text",
+>           "text": "Hello ",
+>           "marks": [{"type": "strong"}]
+>         },
+>         {
+>           "type": "text",
+>           "text": "World!"
+>         }
+>       ]
+>     }
+>   ]
+> }
+> ```
