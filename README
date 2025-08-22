@@ -1,9 +1,9 @@
 > # Jira Wiki Markup to ADF Converter
-> 
+>
 > A comprehensive Python module that converts Jira Wiki Markup to ADF (Atlassian Document Format) with robust error handling and logging.
-> 
+>
 > ---
-> 
+>
 > ## ✨ Features
 >
 > ### Complete Jira Wiki Markup Support
@@ -154,5 +154,4 @@
 >     }
 >   ]
 > }
-> 
-
+> ```
